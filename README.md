@@ -28,6 +28,10 @@ from payment p, rental r, customer c, inventory i, film f
 where date(p.payment_date) = '2005-07-30' and p.payment_date = r.rental_date and r.customer_id = c.customer_id and i.inventory_id = r.inventory_id
 ```
 
+1. Соединения (JOIN): Запрос использует неявные соединения через WHERE, что может привести к неэффективному выполнению. Явные соединения (JOIN) обычно более читаемы и могут быть оптимизированы лучше.
+2. Фильтрация по дате: Условие date(p.payment_date) = '2005-07-30' может быть неэффективным, если payment_date не индексирован.
+3. Отсутствие индексов: Если на полях, используемых в условиях соединения и фильтрации, нет индексов, это может значительно замедлить выполнение запроса.
+
 ```sql
 EXPLAIN ANALYZE
 SELECT DISTINCT
